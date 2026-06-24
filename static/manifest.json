@@ -1,0 +1,8 @@
+{
+  "name": "CodeQuest Pro",
+  "short_name": "CodeQuest",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#00c896"
+}
