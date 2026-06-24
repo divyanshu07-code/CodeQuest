@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Leaderboard - CodeQuest{% endblock %}
+
+{% block content %}
+<h1 class="mb-4"><i class="fas fa-trophy"></i> Global Leaderboard</h1>
+
+<div class="card">
+    <div class="card-body">
+        {% if rankings %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Problems Solved</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rank in rankings %}
+                        <tr style="cursor:pointer;" onclick="window.location='/user/{{ rank.username }}';">
+                            <td>
+                                {% if loop.index == 1 %}
+                                    <i class="fas fa-medal" style="color: gold;"></i> 1st
+                                {% elif loop.index == 2 %}
+                                    <i class="fas fa-medal" style="color: silver;"></i> 2nd
+                                {% elif loop.index == 3 %}
+                                    <i class="fas fa-medal" style="color: #cd7f32;"></i> 3rd
+                                {% else %}
+                                    {{ loop.index }}
+                                {% endif %}
+                            </td>
+                            <td><strong>{{ rank.username }}</strong></td>
+                            <td><span class="badge bg-primary">{{ rank.solved or 0 }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            {% if total_pages > 1 %}
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if page > 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="/leaderboard?page=1">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/leaderboard?page={{ page - 1 }}">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    {% for p in range(max(1, page - 2), min(total_pages + 1, page + 3)) %}
+                        {% if p == page %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ p }}</span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="/leaderboard?page={{ p }}">{{ p }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page < total_pages %}
+                        <li class="page-item">
+                            <a class="page-link" href="/leaderboard?page={{ page + 1 }}">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/leaderboard?page={{ total_pages }}">Last</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> No users yet. Be the first to register!
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

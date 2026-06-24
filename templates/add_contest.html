@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Add Contest - CodeQuest{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="fas fa-trophy"></i> Add Contest</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" novalidate>
+                    <div class="mb-3">
+                        <label for="contest_name" class="form-label">Contest Name *</label>
+                        <input type="text" class="form-control" id="contest_name" name="contest_name" 
+                               placeholder="e.g., Codeforces Round 500" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="platform" class="form-label">Platform *</label>
+                            <select class="form-select" id="platform" name="platform" required>
+                                <option value="">Select Platform</option>
+                                <option value="LeetCode">LeetCode</option>
+                                <option value="CodeForces">CodeForces</option>
+                                <option value="HackerRank">HackerRank</option>
+                                <option value="AtCoder">AtCoder</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="contest_date" class="form-label">Date *</label>
+                            <input type="date" class="form-control" id="contest_date" name="contest_date" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="rank" class="form-label">Rank (Optional)</label>
+                            <input type="number" class="form-control" id="rank" name="rank" placeholder="e.g., 125">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="rating_change" class="form-label">Rating Change (Optional)</label>
+                            <input type="number" class="form-control" id="rating_change" name="rating_change" 
+                                   placeholder="e.g., +50 or -10">
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-check"></i> Add Contest
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

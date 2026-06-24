@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - CodeQuest{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">
+    <i class="fas fa-chart-line"></i> Welcome, {{ username }}!
+</h1>
+
+<!-- Statistics Cards -->
+<div class="row mb-5">
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="stat-card">
+            <p>Total Solved</p>
+            <h3>{{ total }}</h3>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="stat-card" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">
+            <p>Easy</p>
+            <h3>{{ easy }}</h3>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="stat-card" style="background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);">
+            <p>Medium</p>
+            <h3>{{ medium }}</h3>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="stat-card" style="background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);">
+            <p>Hard</p>
+            <h3>{{ hard }}</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Problems Section -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="fas fa-list"></i> Recent Problems</h5>
+    </div>
+    <div class="card-body">
+        {% if recent %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Problem Name</th>
+                            <th>Platform</th>
+                            <th>Difficulty</th>
+                            <th>Topic</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for problem in recent %}
+                        <tr>
+                            <td>{{ problem.problem_name }}</td>
+                            <td><span class="badge bg-info">{{ problem.platform }}</span></td>
+                            <td>
+                                <span class="badge {% if problem.difficulty == 'Easy' %}bg-success{% elif problem.difficulty == 'Medium' %}bg-warning{% else %}bg-danger{% endif %}">
+                                    {{ problem.difficulty }}
+                                </span>
+                            </td>
+                            <td>{{ problem.topic or '-' }}</td>
+                            <td>{{ problem.solved_date }}</td>
+                            <td>
+                                <a href="/edit-problem/{{ problem.id }}" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" action="/delete-problem/{{ problem.id }}" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> No problems added yet. 
+                <a href="/add-problem">Start tracking</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Quick Add Button -->
+<div class="text-center">
+    <a href="/add-problem" class="btn btn-primary btn-lg">
+        <i class="fas fa-plus-circle"></i> Add New Problem
+    </a>
+</div>
+{% endblock %}
