@@ -146,7 +146,7 @@ Suggestions, improvements, and feedback are always welcome. Feel free to open an
 
 **Divyanshu**
 
-ICT Undergraduate | Web Development Enthusiast | Problem Solver
+Web Development Enthusiast | Problem Solver
 
 Thank you for visiting the repository.
 
