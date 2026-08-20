@@ -3,24 +3,31 @@
 {% block title %}Leaderboard - CodeQuest{% endblock %}
 
 {% block content %}
-<h1 class="mb-4"><i class="fas fa-trophy"></i> Global Leaderboard</h1>
+<span class="page-eyebrow"><span class="dot"></span> live rankings</span>
+<h1 class="mb-4"><i class="fas fa-trophy" style="color: var(--orange);"></i> Global Leaderboard</h1>
 
-<div class="card">
-    <div class="card-body">
+<div class="term">
+    <div class="term-bar">
+        <span class="term-dot r"></span>
+        <span class="term-dot y"></span>
+        <span class="term-dot g"></span>
+        <span class="term-title">codequest — leaderboard.rank(users)</span>
+    </div>
+    <div class="term-body" style="padding: 0;">
         {% if rankings %}
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>Rank</th>
+                            <th style="padding-left: 26px;">Rank</th>
                             <th>Username</th>
-                            <th>Problems Solved</th>
+                            <th style="padding-right: 26px;">Problems Solved</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for rank in rankings %}
                         <tr style="cursor:pointer;" onclick="window.location='/user/{{ rank.username }}';">
-                            <td>
+                            <td style="padding-left: 26px;">
                                 {% if loop.index == 1 %}
                                     <i class="fas fa-medal" style="color: gold;"></i> 1st
                                 {% elif loop.index == 2 %}
@@ -28,11 +35,11 @@
                                 {% elif loop.index == 3 %}
                                     <i class="fas fa-medal" style="color: #cd7f32;"></i> 3rd
                                 {% else %}
-                                    {{ loop.index }}
+                                    <span style="color: var(--dim);">{{ loop.index }}</span>
                                 {% endif %}
                             </td>
-                            <td><strong>{{ rank.username }}</strong></td>
-                            <td><span class="badge bg-primary">{{ rank.solved or 0 }}</span></td>
+                            <td><strong style="color: #fff;">{{ rank.username }}</strong></td>
+                            <td style="padding-right: 26px;"><span class="badge bg-primary">{{ rank.solved or 0 }}</span></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -41,8 +48,8 @@
 
             <!-- Pagination -->
             {% if total_pages > 1 %}
-            <nav class="mt-4">
-                <ul class="pagination justify-content-center">
+            <nav class="mt-4 p-3">
+                <ul class="pagination justify-content-center mb-0">
                     {% if page > 1 %}
                         <li class="page-item">
                             <a class="page-link" href="/leaderboard?page=1">First</a>
@@ -76,8 +83,10 @@
             </nav>
             {% endif %}
         {% else %}
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i> No users yet. Be the first to register!
+            <div class="p-4">
+                <div class="alert alert-info mb-0">
+                    <i class="fas fa-info-circle"></i> No users yet. Be the first to register!
+                </div>
             </div>
         {% endif %}
     </div>
