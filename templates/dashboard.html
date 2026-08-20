@@ -3,12 +3,13 @@
 {% block title %}Dashboard - CodeQuest{% endblock %}
 
 {% block content %}
+<span class="page-eyebrow"><span class="dot"></span> session active</span>
 <h1 class="mb-4">
-    <i class="fas fa-chart-line"></i> Welcome, {{ username }}!
+    <i class="fas fa-chart-line" style="color: var(--blue);"></i> Welcome, <span style="color: var(--cyan);">{{ username }}</span><span style="color: var(--dim);">.</span>
 </h1>
 
 <!-- Statistics Cards -->
-<div class="row mb-5">
+<div class="row mb-4">
     <div class="col-md-3 col-sm-6 mb-3">
         <div class="stat-card">
             <p>Total Solved</p>
@@ -16,19 +17,19 @@
         </div>
     </div>
     <div class="col-md-3 col-sm-6 mb-3">
-        <div class="stat-card" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">
+        <div class="stat-card g">
             <p>Easy</p>
             <h3>{{ easy }}</h3>
         </div>
     </div>
     <div class="col-md-3 col-sm-6 mb-3">
-        <div class="stat-card" style="background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);">
+        <div class="stat-card o">
             <p>Medium</p>
             <h3>{{ medium }}</h3>
         </div>
     </div>
     <div class="col-md-3 col-sm-6 mb-3">
-        <div class="stat-card" style="background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);">
+        <div class="stat-card r">
             <p>Hard</p>
             <h3>{{ hard }}</h3>
         </div>
@@ -36,37 +37,40 @@
 </div>
 
 <!-- Recent Problems Section -->
-<div class="card mb-4">
-    <div class="card-header">
-        <h5 class="mb-0"><i class="fas fa-list"></i> Recent Problems</h5>
+<div class="term mb-4">
+    <div class="term-bar">
+        <span class="term-dot r"></span>
+        <span class="term-dot y"></span>
+        <span class="term-dot g"></span>
+        <span class="term-title">codequest — recent_problems.log</span>
     </div>
-    <div class="card-body">
+    <div class="term-body" style="padding: 0;">
         {% if recent %}
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>Problem Name</th>
+                            <th style="padding-left: 26px;">Problem Name</th>
                             <th>Platform</th>
                             <th>Difficulty</th>
                             <th>Topic</th>
                             <th>Date</th>
-                            <th>Actions</th>
+                            <th style="padding-right: 26px;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for problem in recent %}
                         <tr>
-                            <td>{{ problem.problem_name }}</td>
+                            <td style="padding-left: 26px;">{{ problem.problem_name }}</td>
                             <td><span class="badge bg-info">{{ problem.platform }}</span></td>
                             <td>
                                 <span class="badge {% if problem.difficulty == 'Easy' %}bg-success{% elif problem.difficulty == 'Medium' %}bg-warning{% else %}bg-danger{% endif %}">
                                     {{ problem.difficulty }}
                                 </span>
                             </td>
-                            <td>{{ problem.topic or '-' }}</td>
-                            <td>{{ problem.solved_date }}</td>
-                            <td>
+                            <td style="color: var(--dim);">{{ problem.topic or '-' }}</td>
+                            <td style="color: var(--dim);">{{ problem.solved_date }}</td>
+                            <td style="padding-right: 26px;">
                                 <a href="/edit-problem/{{ problem.id }}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -82,9 +86,11 @@
                 </table>
             </div>
         {% else %}
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i> No problems added yet. 
-                <a href="/add-problem">Start tracking</a>
+            <div class="p-4">
+                <div class="alert alert-info mb-0">
+                    <i class="fas fa-info-circle"></i> No problems added yet.
+                    <a href="/add-problem">Start tracking</a>
+                </div>
             </div>
         {% endif %}
     </div>
