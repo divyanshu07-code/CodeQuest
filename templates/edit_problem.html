@@ -5,55 +5,79 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="mb-0"><i class="fas fa-edit"></i> Edit Problem</h4>
+        <span class="page-eyebrow"><span class="dot"></span> editing entry #{{ problem.id }}</span>
+        <div class="term">
+            <div class="term-bar">
+                <span class="term-dot r"></span>
+                <span class="term-dot y"></span>
+                <span class="term-dot g"></span>
+                <span class="term-title">codequest — edit_problem.session — zsh</span>
             </div>
-            <div class="card-body p-4">
+            <div class="term-body">
                 <form method="POST" novalidate>
-                    <div class="mb-3">
-                        <label for="problem_name" class="form-label">Problem Name *</label>
-                        <input type="text" class="form-control" id="problem_name" name="problem_name" 
-                               value="{{ problem.problem_name }}" required>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="platform" class="form-label">Platform *</label>
-                            <select class="form-select" id="platform" name="platform" required>
-                                <option value="LeetCode" {% if problem.platform == 'LeetCode' %}selected{% endif %}>LeetCode</option>
-                                <option value="CodeForces" {% if problem.platform == 'CodeForces' %}selected{% endif %}>CodeForces</option>
-                                <option value="HackerRank" {% if problem.platform == 'HackerRank' %}selected{% endif %}>HackerRank</option>
-                                <option value="AtCoder" {% if problem.platform == 'AtCoder' %}selected{% endif %}>AtCoder</option>
-                                <option value="Other" {% if problem.platform == 'Other' %}selected{% endif %}>Other</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="difficulty" class="form-label">Difficulty *</label>
-                            <select class="form-select" id="difficulty" name="difficulty" required>
-                                <option value="Easy" {% if problem.difficulty == 'Easy' %}selected{% endif %}>Easy</option>
-                                <option value="Medium" {% if problem.difficulty == 'Medium' %}selected{% endif %}>Medium</option>
-                                <option value="Hard" {% if problem.difficulty == 'Hard' %}selected{% endif %}>Hard</option>
-                            </select>
+                    <div class="field">
+                        <label for="problem_name"><span class="tag">str</span> problem_name <span class="req">*</span></label>
+                        <div class="input-shell">
+                            <span class="prefix">&gt;</span>
+                            <input type="text" id="problem_name" name="problem_name" value="{{ problem.problem_name }}" required autofocus>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="topic" class="form-label">Topic</label>
-                            <input type="text" class="form-control" id="topic" name="topic" 
-                                   value="{{ problem.topic or '' }}">
+                        <div class="col-md-6">
+                            <div class="field">
+                                <label for="platform"><span class="tag">enum</span> platform <span class="req">*</span></label>
+                                <div class="input-shell">
+                                    <span class="prefix">&gt;</span>
+                                    <select id="platform" name="platform" required>
+                                        <option value="LeetCode" {% if problem.platform == 'LeetCode' %}selected{% endif %}>LeetCode</option>
+                                        <option value="CodeForces" {% if problem.platform == 'CodeForces' %}selected{% endif %}>CodeForces</option>
+                                        <option value="HackerRank" {% if problem.platform == 'HackerRank' %}selected{% endif %}>HackerRank</option>
+                                        <option value="AtCoder" {% if problem.platform == 'AtCoder' %}selected{% endif %}>AtCoder</option>
+                                        <option value="Other" {% if problem.platform == 'Other' %}selected{% endif %}>Other</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label for="solved_date" class="form-label">Date Solved *</label>
-                            <input type="date" class="form-control" id="solved_date" name="solved_date" 
-                                   value="{{ problem.solved_date }}" required>
+                        <div class="col-md-6">
+                            <div class="field">
+                                <label for="difficulty"><span class="tag">enum</span> difficulty <span class="req">*</span></label>
+                                <div class="input-shell">
+                                    <span class="prefix">&gt;</span>
+                                    <select id="difficulty" name="difficulty" required>
+                                        <option value="Easy" {% if problem.difficulty == 'Easy' %}selected{% endif %}>Easy</option>
+                                        <option value="Medium" {% if problem.difficulty == 'Medium' %}selected{% endif %}>Medium</option>
+                                        <option value="Hard" {% if problem.difficulty == 'Hard' %}selected{% endif %}>Hard</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="field">
+                                <label for="topic"><span class="tag">str</span> topic <span class="opt">optional</span></label>
+                                <div class="input-shell">
+                                    <span class="prefix">&gt;</span>
+                                    <input type="text" id="topic" name="topic" value="{{ problem.topic or '' }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field">
+                                <label for="solved_date"><span class="tag">date</span> solved_date <span class="req">*</span></label>
+                                <div class="input-shell">
+                                    <span class="prefix">&gt;</span>
+                                    <input type="date" id="solved_date" name="solved_date" value="{{ problem.solved_date }}" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                         <a href="/" class="btn btn-secondary">Cancel</a>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-check"></i> Update Problem
