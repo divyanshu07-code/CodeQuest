@@ -3,32 +3,39 @@
 {% block title %}Profile - CodeQuest{% endblock %}
 
 {% block content %}
-<h1 class="mb-4"><i class="fas fa-user-circle"></i> My Profile</h1>
+<span class="page-eyebrow"><span class="dot"></span> account</span>
+<h1 class="mb-4"><i class="fas fa-user-circle" style="color: var(--blue);"></i> My Profile</h1>
 
 <div class="row mb-4">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-info-circle"></i> Account Information</h5>
+    <div class="col-md-6 mb-3 mb-md-0">
+        <div class="term h-100">
+            <div class="term-bar">
+                <span class="term-dot r"></span>
+                <span class="term-dot y"></span>
+                <span class="term-dot g"></span>
+                <span class="term-title">whoami</span>
             </div>
-            <div class="card-body">
-                <p><strong>Username:</strong> {{ user.username }}</p>
-                <p><strong>Member Since:</strong> {{ user.created_at }}</p>
-                <p><strong>Last Login:</strong> {{ user.last_login or 'Never' }}</p>
+            <div class="term-body">
+                <div class="field-hint" style="margin-bottom:10px;"><span style="color:var(--dim);">username</span> <span style="color:var(--dim);">:</span> <span style="color:var(--text);">{{ user.username }}</span></div>
+                <div class="field-hint" style="margin-bottom:10px;"><span style="color:var(--dim);">member_since</span> <span style="color:var(--dim);">:</span> <span style="color:var(--text);">{{ user.created_at }}</span></div>
+                <div class="field-hint"><span style="color:var(--dim);">last_login</span> <span style="color:var(--dim);">:</span> <span style="color:var(--text);">{{ user.last_login or 'Never' }}</span></div>
             </div>
         </div>
     </div>
 
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-chart-pie"></i> Statistics</h5>
+        <div class="term h-100">
+            <div class="term-bar">
+                <span class="term-dot r"></span>
+                <span class="term-dot y"></span>
+                <span class="term-dot g"></span>
+                <span class="term-title">stats.summary()</span>
             </div>
-            <div class="card-body">
-                <p><strong>Total Solved:</strong> <span class="badge bg-primary">{{ stats.total or 0 }}</span></p>
-                <p><strong>Easy:</strong> <span class="badge bg-success">{{ stats.easy or 0 }}</span></p>
-                <p><strong>Medium:</strong> <span class="badge bg-warning">{{ stats.medium or 0 }}</span></p>
-                <p><strong>Hard:</strong> <span class="badge bg-danger">{{ stats.hard or 0 }}</span></p>
+            <div class="term-body">
+                <p class="mb-2"><strong style="color: var(--dim); font-size: 0.85rem;">Total Solved:</strong> <span class="badge bg-primary">{{ stats.total or 0 }}</span></p>
+                <p class="mb-2"><strong style="color: var(--dim); font-size: 0.85rem;">Easy:</strong> <span class="badge bg-success">{{ stats.easy or 0 }}</span></p>
+                <p class="mb-2"><strong style="color: var(--dim); font-size: 0.85rem;">Medium:</strong> <span class="badge bg-warning">{{ stats.medium or 0 }}</span></p>
+                <p class="mb-0"><strong style="color: var(--dim); font-size: 0.85rem;">Hard:</strong> <span class="badge bg-danger">{{ stats.hard or 0 }}</span></p>
             </div>
         </div>
     </div>
