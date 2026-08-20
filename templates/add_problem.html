@@ -5,56 +5,85 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="mb-0"><i class="fas fa-plus-circle"></i> Add Problem</h4>
+        <span class="page-eyebrow"><span class="dot"></span> new entry</span>
+        <div class="term">
+            <div class="term-bar">
+                <span class="term-dot r"></span>
+                <span class="term-dot y"></span>
+                <span class="term-dot g"></span>
+                <span class="term-title">codequest — add_problem.session — zsh</span>
             </div>
-            <div class="card-body p-4">
+            <div class="term-body">
+                <div class="code-preview" aria-hidden="true" style="background: var(--panel-2); border: 1px solid var(--border-soft); border-radius: 8px; padding: 12px 16px; font-size: 0.78rem; line-height: 1.6; margin-bottom: 22px; white-space: pre; overflow-x: auto;"><span style="color:#3b4351;display:inline-block;width:16px;">1</span><span style="color:var(--purple);">const</span> <span style="color:var(--blue);">problem</span> <span style="color:var(--dim);">=</span> <span style="color:var(--green);">{}</span><span style="color:var(--dim);">;</span>
+<span style="color:#3b4351;display:inline-block;width:16px;">2</span>
+<span style="color:#3b4351;display:inline-block;width:16px;">3</span><span style="color:var(--cyan);">problems</span><span style="color:var(--dim);">.</span><span style="color:var(--cyan);">push</span><span style="color:var(--dim);">(</span><span style="color:var(--blue);">problem</span><span style="color:var(--dim);">);</span> <span style="color:#4b5568;font-style:italic;">// press ⏎ to run</span></div>
+
                 <form method="POST" novalidate>
-                    <div class="mb-3">
-                        <label for="problem_name" class="form-label">Problem Name *</label>
-                        <input type="text" class="form-control" id="problem_name" name="problem_name" 
-                               placeholder="e.g., Two Sum" required>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="platform" class="form-label">Platform *</label>
-                            <select class="form-select" id="platform" name="platform" required>
-                                <option value="">Select Platform</option>
-                                <option value="LeetCode">LeetCode</option>
-                                <option value="CodeForces">CodeForces</option>
-                                <option value="HackerRank">HackerRank</option>
-                                <option value="AtCoder">AtCoder</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="difficulty" class="form-label">Difficulty *</label>
-                            <select class="form-select" id="difficulty" name="difficulty" required>
-                                <option value="">Select Difficulty</option>
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
-                            </select>
+                    <div class="field">
+                        <label for="problem_name"><span class="tag">str</span> problem_name <span class="req">*</span></label>
+                        <div class="input-shell">
+                            <span class="prefix">&gt;</span>
+                            <input type="text" id="problem_name" name="problem_name" placeholder="e.g., Two Sum" required autofocus>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="topic" class="form-label">Topic</label>
-                            <input type="text" class="form-control" id="topic" name="topic" 
-                                   placeholder="e.g., Hash Map">
+                        <div class="col-md-6">
+                            <div class="field">
+                                <label for="platform"><span class="tag">enum</span> platform <span class="req">*</span></label>
+                                <div class="input-shell">
+                                    <span class="prefix">&gt;</span>
+                                    <select id="platform" name="platform" required>
+                                        <option value="">Select Platform</option>
+                                        <option value="LeetCode">LeetCode</option>
+                                        <option value="CodeForces">CodeForces</option>
+                                        <option value="HackerRank">HackerRank</option>
+                                        <option value="AtCoder">AtCoder</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label for="solved_date" class="form-label">Date Solved *</label>
-                            <input type="date" class="form-control" id="solved_date" name="solved_date" required>
+                        <div class="col-md-6">
+                            <div class="field">
+                                <label for="difficulty"><span class="tag">enum</span> difficulty <span class="req">*</span></label>
+                                <div class="input-shell">
+                                    <span class="prefix">&gt;</span>
+                                    <select id="difficulty" name="difficulty" required>
+                                        <option value="">Select Difficulty</option>
+                                        <option value="Easy">Easy</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Hard">Hard</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="field">
+                                <label for="topic"><span class="tag">str</span> topic <span class="opt">optional</span></label>
+                                <div class="input-shell">
+                                    <span class="prefix">&gt;</span>
+                                    <input type="text" id="topic" name="topic" placeholder="e.g., Hash Map">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field">
+                                <label for="solved_date"><span class="tag">date</span> solved_date <span class="req">*</span></label>
+                                <div class="input-shell">
+                                    <span class="prefix">&gt;</span>
+                                    <input type="date" id="solved_date" name="solved_date" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                         <a href="/" class="btn btn-secondary">Cancel</a>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-check"></i> Add Problem
