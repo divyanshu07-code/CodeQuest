@@ -3,33 +3,37 @@
 {% block title %}{{ user.username }} - CodeQuest{% endblock %}
 
 {% block content %}
+<span class="page-eyebrow"><span class="dot"></span> public profile</span>
 <h1 class="mb-4">
-    <i class="fas fa-user"></i> {{ user.username }}'s Profile
+    <i class="fas fa-user" style="color: var(--blue);"></i> {{ user.username }}'s Profile
 </h1>
 
 <div class="row mb-4">
     <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-chart-pie"></i> Statistics</h5>
+        <div class="term">
+            <div class="term-bar">
+                <span class="term-dot r"></span>
+                <span class="term-dot y"></span>
+                <span class="term-dot g"></span>
+                <span class="term-title">stats.summary({{ user.username }})</span>
             </div>
-            <div class="card-body">
+            <div class="term-body">
                 <div class="row text-center">
-                    <div class="col-md-3">
-                        <h3 class="text-primary">{{ stats.total or 0 }}</h3>
-                        <p>Total Solved</p>
+                    <div class="col-md-3 col-6 mb-3 mb-md-0">
+                        <h3 style="color: var(--blue); font-size: 2rem;">{{ stats.total or 0 }}</h3>
+                        <p style="color: var(--dim); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Total Solved</p>
                     </div>
-                    <div class="col-md-3">
-                        <h3 class="text-success">{{ stats.easy or 0 }}</h3>
-                        <p>Easy</p>
+                    <div class="col-md-3 col-6 mb-3 mb-md-0">
+                        <h3 style="color: var(--green); font-size: 2rem;">{{ stats.easy or 0 }}</h3>
+                        <p style="color: var(--dim); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Easy</p>
                     </div>
-                    <div class="col-md-3">
-                        <h3 class="text-warning">{{ stats.medium or 0 }}</h3>
-                        <p>Medium</p>
+                    <div class="col-md-3 col-6">
+                        <h3 style="color: var(--orange); font-size: 2rem;">{{ stats.medium or 0 }}</h3>
+                        <p style="color: var(--dim); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Medium</p>
                     </div>
-                    <div class="col-md-3">
-                        <h3 class="text-danger">{{ stats.hard or 0 }}</h3>
-                        <p>Hard</p>
+                    <div class="col-md-3 col-6">
+                        <h3 style="color: var(--red); font-size: 2rem;">{{ stats.hard or 0 }}</h3>
+                        <p style="color: var(--dim); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">Hard</p>
                     </div>
                 </div>
             </div>
@@ -37,40 +41,45 @@
     </div>
 </div>
 
-<div class="card mb-4">
-    <div class="card-header">
-        <h5 class="mb-0"><i class="fas fa-list"></i> Recent Problems</h5>
+<div class="term mb-4">
+    <div class="term-bar">
+        <span class="term-dot r"></span>
+        <span class="term-dot y"></span>
+        <span class="term-dot g"></span>
+        <span class="term-title">recent_problems.log</span>
     </div>
-    <div class="card-body">
+    <div class="term-body" style="padding: 0;">
         {% if problems %}
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>Problem</th>
+                            <th style="padding-left: 26px;">Problem</th>
                             <th>Platform</th>
                             <th>Difficulty</th>
-                            <th>Date</th>
+                            <th style="padding-right: 26px;">Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for problem in problems %}
                         <tr>
-                            <td>{{ problem.problem_name }}</td>
+                            <td style="padding-left: 26px;">{{ problem.problem_name }}</td>
                             <td><span class="badge bg-info">{{ problem.platform }}</span></td>
                             <td>
                                 <span class="badge {% if problem.difficulty == 'Easy' %}bg-success{% elif problem.difficulty == 'Medium' %}bg-warning{% else %}bg-danger{% endif %}">
                                     {{ problem.difficulty }}
                                 </span>
                             </td>
-                            <td>{{ problem.solved_date }}</td>
+                            <td style="padding-right: 26px; color: var(--dim);">{{ problem.solved_date }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         {% else %}
-            <p class="text-muted">No problems yet</p>
+            <div class="p-4">
+                <p class="mb-0" style="color: var(--dim);">No problems yet</p>
+            </div>
         {% endif %}
     </div>
 </div>
